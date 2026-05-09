@@ -1,3 +1,4 @@
+
 /* =============================================
    BIRD CAM — script.js
    ============================================= */
@@ -59,9 +60,9 @@ const BIRDS = [
   },
   {
     id: 6,
-    name: "Black-headed Grosbeak",
-    scientific: "Pheucticus melanocephalus",
-    image: "assets/birds/grosbeak.jpg",
+    name: "Red-winged Blackbird",
+    scientific: "Agelaius phoeniceus",
+    image: "assets/birds/red-winged-blackbird.jpg",
     videos: [],
   },
   {
