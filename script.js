@@ -1,15 +1,30 @@
+
 /* =============================================
    BIRD CAM — script.js
    ============================================= */
 
 
 /* =============================================
-   YOUR DATA — Edit this section to add birds
-   and videos as you go!
+   YOUR DATA — Edit this section to add birds!
 
-   Video naming convention:
-   assets/videos/bird-name-description.mp4
-   e.g. assets/videos/american-robin-morning-visit.mp4
+   To add a video for a bird, just upload a file
+   to assets/videos/ using this naming format:
+
+       bird-slug-1.mp4
+       bird-slug-2.mp4
+       bird-slug-3.mp4
+       bird-slug-4.mp4
+
+   The slug is the "slug" field on each bird below.
+   For example, the American Robin's slug is
+   "american-robin", so its videos would be:
+
+       assets/videos/american-robin-1.mp4
+       assets/videos/american-robin-2.mp4
+
+   You can have up to 4 videos per bird.
+   Missing files are automatically hidden —
+   no need to edit this script at all!
    ============================================= */
 
 const BIRDS = [
@@ -17,126 +32,122 @@ const BIRDS = [
     id: 1,
     name: "Spotted Towhee",
     scientific: "Pipilo maculatus",
+    slug: "spotted-towhee",
     image: "assets/birds/spotted-towhee.jpg",
-    videos: [
-      // Add your clips like this:
-      // {
-      //   title: "Morning visit",
-      //   date: "May 9, 2025",
-      //   videoUrl: "assets/videos/spotted-towhee-morning-visit.mp4",
-      // },
-    ],
   },
   {
     id: 2,
     name: "Say's Phoebe",
     scientific: "Sayornis saya",
+    slug: "says-phoebe",
     image: "assets/birds/says-phoebe.jpg",
-    videos: [],
   },
   {
     id: 3,
     name: "American Robin",
     scientific: "Turdus migratorius",
+    slug: "american-robin",
     image: "assets/birds/american-robin.jpg",
-    videos: [],
   },
   {
     id: 4,
     name: "Pigeon",
     scientific: "Columba livia",
+    slug: "pigeon",
     image: "assets/birds/pigeon.jpg",
-    videos: [],
   },
   {
     id: 5,
     name: "House Finch",
     scientific: "Haemorhous mexicanus",
+    slug: "house-finch",
     image: "assets/birds/house-finch.jpg",
-    videos: [],
   },
   {
     id: 6,
     name: "Red-winged Blackbird",
     scientific: "Agelaius phoeniceus",
+    slug: "red-winged-blackbird",
     image: "assets/birds/red-winged-blackbird.jpg",
-    videos: [],
   },
   {
     id: 7,
     name: "Chipping Sparrow",
     scientific: "Spizella passerina",
+    slug: "chipping-sparrow",
     image: "assets/birds/chipping-sparrow.jpg",
-    videos: [],
   },
   {
     id: 8,
     name: "Mountain Bluebird",
     scientific: "Sialia currucoides",
+    slug: "mountain-bluebird",
     image: "assets/birds/mountain-bluebird.jpg",
-    videos: [],
   },
   {
     id: 9,
     name: "Mourning Dove",
     scientific: "Zenaida macroura",
+    slug: "mourning-dove",
     image: "assets/birds/mourning-dove.jpg",
-    videos: [],
   },
   {
     id: 10,
     name: "American Goldfinch",
     scientific: "Spinus tristis",
+    slug: "american-goldfinch",
     image: "assets/birds/american-goldfinch.jpg",
-    videos: [],
   },
   {
     id: 11,
     name: "Dark-eyed Junco",
     scientific: "Junco hyemalis",
+    slug: "dark-eyed-junco",
     image: "assets/birds/dark-eyed-junco.jpg",
-    videos: [],
   },
   {
     id: 12,
     name: "Pine Siskin",
     scientific: "Spinus pinus",
+    slug: "pine-siskin",
     image: "assets/birds/pine-siskin.jpg",
-    videos: [],
   },
   {
     id: 13,
     name: "Mouse",
     scientific: "Mus musculus",
+    slug: "mouse",
     image: "assets/birds/mouse.jpg",
-    videos: [],
   },
   {
     id: 14,
     name: "Midge",
     scientific: "Chironomidae",
+    slug: "midge",
     image: "assets/birds/midge.jpg",
-    videos: [],
   },
   {
     id: 15,
     name: "Common Raven",
     scientific: "Corvus corax",
+    slug: "common-raven",
     image: "assets/birds/common-raven.jpg",
-    videos: [],
   },
   {
     id: 16,
     name: "Black-billed Magpie",
     scientific: "Pica hudsonia",
+    slug: "black-billed-magpie",
     image: "assets/birds/black-billed-magpie.jpg",
-    videos: [],
   },
 ];
 
 /* =============================================
    APP LOGIC — No need to edit below this line
    ============================================= */
+
+// How many video slots to check per bird (increase if you ever have more)
+const MAX_VIDEOS = 4;
 
 const birdGrid      = document.getElementById("birdGrid");
 const videoPanel    = document.getElementById("videoPanel");
@@ -148,10 +159,16 @@ const clipsCount    = document.getElementById("clipsCount");
 let selectedCard   = null;
 let selectedBirdId = null;
 
-// Header stats
-const totalClips = BIRDS.reduce((sum, b) => sum + b.videos.length, 0);
+// Header stats — clip count updates dynamically as videos load
 speciesCount.textContent = BIRDS.length;
-clipsCount.textContent   = totalClips;
+clipsCount.textContent   = "…";
+
+// Count confirmed videos across all birds (updates as videos resolve)
+let confirmedClips = 0;
+function updateClipCount(delta) {
+  confirmedClips += delta;
+  clipsCount.textContent = confirmedClips;
+}
 
 // Build bird cards
 BIRDS.forEach(bird => {
@@ -164,7 +181,7 @@ BIRDS.forEach(bird => {
     <div class="bird-card-info">
       <div class="bird-card-name">${bird.name}</div>
       <div class="bird-card-scientific">${bird.scientific}</div>
-      <div class="bird-card-clips">&#9654; ${bird.videos.length} clip${bird.videos.length !== 1 ? "s" : ""}</div>
+      <div class="bird-card-clips" id="clips-${bird.id}">&#9654; checking…</div>
     </div>
   `;
   card.addEventListener("click", () => {
@@ -175,9 +192,42 @@ BIRDS.forEach(bird => {
     }
   });
   birdGrid.appendChild(card);
+
+  // Pre-check how many videos exist for this bird
+  checkVideoCount(bird);
 });
 
-// Find the last card in the same visual row as the clicked card
+// Silently checks which of the 4 slots exist for a bird
+// by attempting to fetch each file's headers
+function checkVideoCount(bird) {
+  let found = 0;
+  let checked = 0;
+
+  for (let i = 1; i <= MAX_VIDEOS; i++) {
+    const url = `assets/videos/${bird.slug}-${i}.mp4`;
+    fetch(url, { method: "HEAD" })
+      .then(res => {
+        if (res.ok) {
+          found++;
+          updateClipCount(1);
+        }
+      })
+      .finally(() => {
+        checked++;
+        if (checked === MAX_VIDEOS) {
+          // All slots checked — update the clip count on the card
+          const label = document.getElementById(`clips-${bird.id}`);
+          if (label) {
+            label.textContent = found > 0
+              ? `▶ ${found} clip${found !== 1 ? "s" : ""}`
+              : "";
+          }
+        }
+      });
+  }
+}
+
+// Returns the last card in the same visual row as the clicked card
 function getRowLastCard(clickedCard) {
   const cards = Array.from(birdGrid.querySelectorAll(".bird-card"));
   const clickedTop = clickedCard.getBoundingClientRect().top;
@@ -190,14 +240,11 @@ function getRowLastCard(clickedCard) {
   return lastInRow;
 }
 
+// Build the video panel for a bird, auto-detecting which slots exist
 function openPanel(bird, card) {
-  // Pause any existing videos
   document.querySelectorAll("#videoGrid video").forEach(v => v.pause());
 
-  // Deselect old card
   if (selectedCard) selectedCard.classList.remove("selected");
-
-  // Select new card
   card.classList.add("selected");
   selectedCard   = card;
   selectedBirdId = bird.id;
@@ -206,41 +253,57 @@ function openPanel(bird, card) {
   const rowLast = getRowLastCard(card);
   rowLast.after(videoPanel);
 
-  // Populate videos
-  if (bird.videos.length === 0) {
-    videoGrid.innerHTML = `<p class="no-clips-msg">No clips yet — check back soon!</p>`;
-  } else {
-    videoGrid.innerHTML = "";
-    bird.videos.forEach(video => {
-      const vc = document.createElement("div");
-      vc.className = "video-card";
-      vc.innerHTML = `
-        <div class="video-wrapper">
-          <video controls preload="metadata">
-            <source src="${video.videoUrl}" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="video-info">
-          <div class="video-title">${video.title}</div>
-          <div class="video-date">${video.date}</div>
-        </div>
-      `;
-      videoGrid.appendChild(vc);
-    });
-  }
+  // Show a loading state while we figure out which videos exist
+  videoGrid.innerHTML = `<p class="no-clips-msg">Loading…</p>`;
 
-  // Remove .open first so transition re-triggers when switching birds
   videoPanel.classList.remove("open");
-
-  // Use requestAnimationFrame so the browser paints the collapsed state
-  // before we add .open — this ensures the transition always fires
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       videoPanel.classList.add("open");
       setTimeout(() => {
         videoPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }, 60);
+    });
+  });
+
+  // Check all slots and build cards for ones that exist
+  const checks = [];
+  for (let i = 1; i <= MAX_VIDEOS; i++) {
+    const url = `assets/videos/${bird.slug}-${i}.mp4`;
+    checks.push(
+      fetch(url, { method: "HEAD" })
+        .then(res => ({ url, index: i, exists: res.ok }))
+        .catch(() => ({ url, index: i, exists: false }))
+    );
+  }
+
+  Promise.all(checks).then(results => {
+    // Only render if this bird is still the selected one
+    if (selectedBirdId !== bird.id) return;
+
+    const existing = results.filter(r => r.exists);
+
+    if (existing.length === 0) {
+      videoGrid.innerHTML = `<p class="no-clips-msg">No clips yet — check back soon!</p>`;
+      return;
+    }
+
+    videoGrid.innerHTML = "";
+    existing.forEach(({ url, index }) => {
+      const vc = document.createElement("div");
+      vc.className = "video-card";
+      vc.innerHTML = `
+        <div class="video-wrapper">
+          <video controls preload="metadata">
+            <source src="${url}" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Clip ${index}</div>
+        </div>
+      `;
+      videoGrid.appendChild(vc);
     });
   });
 }
