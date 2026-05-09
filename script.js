@@ -138,7 +138,6 @@ const BIRDS = [
    APP LOGIC — No need to edit below this line
    ============================================= */
 
-// Grab elements
 const birdGrid       = document.getElementById("birdGrid");
 const videoPanel     = document.getElementById("videoPanel");
 const videoGrid      = document.getElementById("videoGrid");
@@ -148,16 +147,15 @@ const closePanelBtn  = document.getElementById("closePanelBtn");
 const speciesCount   = document.getElementById("speciesCount");
 const clipsCount     = document.getElementById("clipsCount");
 
-// Track which card is currently selected
-let selectedCard = null;
+let selectedCard   = null;
 let selectedBirdId = null;
 
-// Fill in header stats
-const totalClips = BIRDS.reduce((sum, bird) => sum + bird.videos.length, 0);
+// Header stats
+const totalClips = BIRDS.reduce((sum, b) => sum + b.videos.length, 0);
 speciesCount.textContent = BIRDS.length;
 clipsCount.textContent   = totalClips;
 
-// Build the bird gallery
+// Build bird cards
 BIRDS.forEach(bird => {
   const card = document.createElement("div");
   card.className = "bird-card";
@@ -171,30 +169,49 @@ BIRDS.forEach(bird => {
       <div class="bird-card-clips">&#9654; ${bird.videos.length} clip${bird.videos.length !== 1 ? "s" : ""}</div>
     </div>
   `;
-
   card.addEventListener("click", () => {
-    // Clicking the same bird again closes the panel
     if (selectedBirdId === bird.id) {
       closePanel();
-      return;
+    } else {
+      openPanel(bird, card);
     }
-    openPanel(bird, card);
   });
-
   birdGrid.appendChild(card);
 });
 
-// Open the video panel for a bird
+// Find the last card in the same grid row as the clicked card,
+// then insert the panel right after it so it appears below that row.
+function getRowLastCard(clickedCard) {
+  const cards = Array.from(birdGrid.querySelectorAll(".bird-card"));
+  const clickedTop = clickedCard.getBoundingClientRect().top;
+
+  // Find all cards whose top matches the clicked card (same row)
+  let lastInRow = clickedCard;
+  cards.forEach(c => {
+    if (Math.abs(c.getBoundingClientRect().top - clickedTop) < 5) {
+      lastInRow = c;
+    }
+  });
+  return lastInRow;
+}
+
 function openPanel(bird, card) {
-  // Deselect previous card
+  // Pause any existing videos
+  document.querySelectorAll("#videoGrid video").forEach(v => v.pause());
+
+  // Deselect old card
   if (selectedCard) selectedCard.classList.remove("selected");
 
   // Select new card
   card.classList.add("selected");
-  selectedCard = card;
+  selectedCard   = card;
   selectedBirdId = bird.id;
 
-  // Update panel header
+  // Move panel to right after the last card in this row
+  const rowLast = getRowLastCard(card);
+  rowLast.after(videoPanel);
+
+  // Populate panel content
   panelBirdName.textContent = bird.name;
 
   if (bird.videos.length === 0) {
@@ -202,13 +219,11 @@ function openPanel(bird, card) {
     videoGrid.innerHTML = `<p class="no-clips-msg">No clips yet — check back soon!</p>`;
   } else {
     panelClipCount.textContent = `${bird.videos.length} clip${bird.videos.length !== 1 ? "s" : ""}`;
-
-    // Build video cards with native <video> player, no autoplay
     videoGrid.innerHTML = "";
     bird.videos.forEach(video => {
-      const card = document.createElement("div");
-      card.className = "video-card";
-      card.innerHTML = `
+      const vc = document.createElement("div");
+      vc.className = "video-card";
+      vc.innerHTML = `
         <div class="video-wrapper">
           <video controls preload="metadata">
             <source src="${video.videoUrl}" type="video/mp4" />
@@ -220,29 +235,35 @@ function openPanel(bird, card) {
           <div class="video-date">${video.date}</div>
         </div>
       `;
-      videoGrid.appendChild(card);
+      videoGrid.appendChild(vc);
     });
   }
 
-  // Open the panel
+  // Remove closing class, trigger open animation
+  videoPanel.classList.remove("closing");
   videoPanel.classList.add("open");
 
-  // Scroll panel into view smoothly
+  // Scroll panel into view
   setTimeout(() => {
     videoPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }, 50);
+  }, 60);
 }
 
-// Close the video panel
 function closePanel() {
-  videoPanel.classList.remove("open");
-  if (selectedCard) selectedCard.classList.remove("selected");
-  selectedCard = null;
-  selectedBirdId = null;
-
-  // Pause any playing videos when panel closes
+  // Pause videos
   document.querySelectorAll("#videoGrid video").forEach(v => v.pause());
+
+  // Animate out
+  videoPanel.classList.remove("open");
+  videoPanel.classList.add("closing");
+
+  videoPanel.addEventListener("animationend", () => {
+    videoPanel.classList.remove("closing");
+  }, { once: true });
+
+  if (selectedCard) selectedCard.classList.remove("selected");
+  selectedCard   = null;
+  selectedBirdId = null;
 }
 
-// Close button
 closePanelBtn.addEventListener("click", closePanel);
