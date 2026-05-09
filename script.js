@@ -8,7 +8,8 @@
    YOUR DATA — Edit this section to add your
    own birds and videos!
 
-   For images: add your photos to assets/birds/
+   For images: replace the image URL with your
+   own file path e.g. "assets/birds/robin.jpg"
    For videos: add your clips to assets/videos/
    ============================================= */
 
@@ -17,7 +18,8 @@ const BIRDS = [
     id: 1,
     name: "Spotted Towhee",
     scientific: "Pipilo maculatus",
-    image: "assets/birds/spotted-towhee.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/spotted-towhee.jpg"
+    image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=600&q=80",
     videos: [
       // Add your videos like this:
       // {
@@ -33,105 +35,120 @@ const BIRDS = [
     id: 2,
     name: "Say's Phoebe",
     scientific: "Sayornis saya",
-    image: "assets/birds/says-phoebe.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/says-phoebe.jpg"
+    image: "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=600&q=80",
     videos: [],
   },
   {
     id: 3,
     name: "American Robin",
     scientific: "Turdus migratorius",
-    image: "assets/birds/american-robin.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/american-robin.jpg"
+    image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=600&q=80",
     videos: [],
   },
   {
     id: 4,
     name: "Pigeon",
     scientific: "Columba livia",
-    image: "assets/birds/pigeon.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/pigeon.jpg"
+    image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&q=80",
     videos: [],
   },
   {
     id: 5,
     name: "House Finch",
     scientific: "Haemorhous mexicanus",
-    image: "assets/birds/house-finch.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/house-finch.jpg"
+    image: "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=600&q=80",
     videos: [],
   },
   {
     id: 6,
     name: "Black-headed Grosbeak",
     scientific: "Pheucticus melanocephalus",
-    image: "assets/birds/grosbeak.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/grosbeak.jpg"
+    image: "https://images.unsplash.com/photo-1638378384673-0c1d5b5c879b?w=600&q=80",
     videos: [],
   },
   {
     id: 7,
     name: "Chipping Sparrow",
     scientific: "Spizella passerina",
-    image: "assets/birds/chipping-sparrow.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/chipping-sparrow.jpg"
+    image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=600&q=80",
     videos: [],
   },
   {
     id: 8,
     name: "Mountain Bluebird",
     scientific: "Sialia currucoides",
-    image: "assets/birds/mountain-bluebird.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/mountain-bluebird.jpg"
+    image: "https://images.unsplash.com/photo-1591608971362-f08b2a75731a?w=600&q=80",
     videos: [],
   },
   {
     id: 9,
     name: "Mourning Dove",
     scientific: "Zenaida macroura",
-    image: "assets/birds/mourning-dove.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/mourning-dove.jpg"
+    image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&q=80",
     videos: [],
   },
   {
     id: 10,
     name: "American Goldfinch",
     scientific: "Spinus tristis",
-    image: "assets/birds/american-goldfinch.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/american-goldfinch.jpg"
+    image: "https://images.unsplash.com/photo-1608855238293-a8853e7f7c98?w=600&q=80",
     videos: [],
   },
   {
     id: 11,
     name: "Dark-eyed Junco",
     scientific: "Junco hyemalis",
-    image: "assets/birds/dark-eyed-junco.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/dark-eyed-junco.jpg"
+    image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=600&q=80",
     videos: [],
   },
   {
     id: 12,
     name: "Pine Siskin",
     scientific: "Spinus pinus",
-    image: "assets/birds/pine-siskin.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/pine-siskin.jpg"
+    image: "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=600&q=80",
     videos: [],
   },
   {
     id: 13,
     name: "Mouse",
     scientific: "Mus musculus",
-    image: "assets/birds/mouse.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/mouse.jpg"
+    image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&q=80",
     videos: [],
   },
   {
     id: 14,
     name: "Midge",
     scientific: "Chironomidae",
-    image: "assets/birds/midge.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/midge.jpg"
+    image: "https://images.unsplash.com/photo-1608855238293-a8853e7f7c98?w=600&q=80",
     videos: [],
   },
   {
     id: 15,
     name: "Common Raven",
     scientific: "Corvus corax",
-    image: "assets/birds/common-raven.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/common-raven.jpg"
+    image: "https://images.unsplash.com/photo-1638378384673-0c1d5b5c879b?w=600&q=80",
     videos: [],
   },
   {
     id: 16,
     name: "Black-billed Magpie",
     scientific: "Pica hudsonia",
-    image: "assets/birds/black-billed-magpie.jpg",
+    // PLACEHOLDER — replace with: "assets/birds/black-billed-magpie.jpg"
+    image: "https://images.unsplash.com/photo-1591608971362-f08b2a75731a?w=600&q=80",
     videos: [],
   },
 ];
