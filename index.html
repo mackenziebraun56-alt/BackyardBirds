@@ -29,22 +29,24 @@
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
+    <div class="bird-grid" id="birdGrid">
 
-    <!-- BIRD GALLERY GRID -->
-    <div class="bird-grid" id="birdGrid"></div>
-
-    <!-- EXPANDABLE VIDEO PANEL (hidden until a bird is clicked) -->
-    <div class="video-panel" id="videoPanel">
-      <div class="video-panel-header">
-        <div class="video-panel-title-group">
-          <span class="video-panel-bird-name" id="panelBirdName"></span>
-          <span class="video-panel-clip-count" id="panelClipCount"></span>
+      <!-- Video panel lives inside the grid so it pushes rows down.
+           JavaScript will move it after whichever card is clicked. -->
+      <div class="video-panel" id="videoPanel">
+        <div class="video-panel-inner">
+          <div class="video-panel-header">
+            <div class="video-panel-title-group">
+              <span class="video-panel-bird-name" id="panelBirdName"></span>
+              <span class="video-panel-clip-count" id="panelClipCount"></span>
+            </div>
+            <button class="close-panel-btn" id="closePanelBtn" aria-label="Close">&#10005;</button>
+          </div>
+          <div class="video-grid" id="videoGrid"></div>
         </div>
-        <button class="close-panel-btn" id="closePanelBtn">&#10005;</button>
       </div>
-      <div class="video-grid" id="videoGrid"></div>
-    </div>
 
+    </div>
   </main>
 
   <script src="script.js"></script>
