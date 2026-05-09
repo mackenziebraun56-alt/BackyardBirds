@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bird Cam</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-left">
+      <button class="back-btn hidden" id="backBtn">&#8592; All Birds</button>
+      <div class="logo" id="logo">
+        <span class="logo-icon">&#128247;</span>
+        <span class="logo-text">Bird Cam</span>
+      </div>
+    </div>
+    <div class="header-stats" id="headerStats">
+      <div class="stat">
+        <span class="stat-number" id="speciesCount">0</span>
+        <span class="stat-label">species</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-number" id="clipsCount">0</span>
+        <span class="stat-label">clips</span>
+      </div>
+    </div>
+    <div class="header-bird-name hidden" id="headerBirdName"></div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- BIRD GALLERY VIEW -->
+    <section id="galleryView">
+      <div class="bird-grid" id="birdGrid"></div>
+    </section>
+
+    <!-- VIDEO DETAIL VIEW -->
+    <section id="detailView" class="hidden">
+      <p class="clip-count" id="clipCount"></p>
+      <div class="video-grid" id="videoGrid"></div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
