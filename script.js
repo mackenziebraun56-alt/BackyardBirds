@@ -1,30 +1,18 @@
-
 /* =============================================
    BIRD CAM — script.js
    ============================================= */
 
 
 /* =============================================
-   YOUR DATA — Edit this section to add birds!
+   YOUR DATA
 
-   To add a video for a bird, just upload a file
-   to assets/videos/ using this naming format:
+   To add more videos, paste the Google Drive
+   file ID into the driveIds array for that bird.
+   Get the ID from the share link:
+   drive.google.com/file/d/ --> ID <-- /view
 
-       bird-slug-1.mp4
-       bird-slug-2.mp4
-       bird-slug-3.mp4
-       bird-slug-4.mp4
-
-   The slug is the "slug" field on each bird below.
-   For example, the American Robin's slug is
-   "american-robin", so its videos would be:
-
-       assets/videos/american-robin-1.mp4
-       assets/videos/american-robin-2.mp4
-
-   You can have up to 4 videos per bird.
-   Missing files are automatically hidden —
-   no need to edit this script at all!
+   To add a new bird, copy an existing entry
+   and fill in the details.
    ============================================= */
 
 const BIRDS = [
@@ -32,113 +20,152 @@ const BIRDS = [
     id: 1,
     name: "Spotted Towhee",
     scientific: "Pipilo maculatus",
-    slug: "spotted-towhee",
     image: "assets/birds/spotted-towhee.jpg",
+    driveIds: [
+      "1gIywb72dQETJsPoEUl--g5PuNEiQwJRA",
+    ],
   },
   {
     id: 2,
     name: "Say's Phoebe",
     scientific: "Sayornis saya",
-    slug: "says-phoebe",
     image: "assets/birds/says-phoebe.jpg",
+    driveIds: [
+      "1Ym3K5XtpI6AoxUypxgHoG5AwlxDphafB",
+    ],
   },
   {
     id: 3,
     name: "American Robin",
     scientific: "Turdus migratorius",
-    slug: "american-robin",
     image: "assets/birds/american-robin.jpg",
+    driveIds: [
+      "15IrrwSTEz7gQ29ThUsdiwGLsX6O7OUr9",
+    ],
   },
   {
     id: 4,
     name: "Pigeon",
     scientific: "Columba livia",
-    slug: "pigeon",
     image: "assets/birds/pigeon.jpg",
+    driveIds: [
+      "1sUo9ZdctfbQPwZMiLZr-JPvsdK91y1qt",
+      "18NkT9zFmXMR6RXdQYvr9C-qH81PtYP8N",
+      "16C08MMlvjJo3tju9rC3UNVMXePnqrM5Z",
+    ],
   },
   {
     id: 5,
     name: "House Finch",
     scientific: "Haemorhous mexicanus",
-    slug: "house-finch",
     image: "assets/birds/house-finch.jpg",
+    driveIds: [
+      "1bCuSCDtr0aHcsrF6n_Hp0nROVrgXCpMv",
+      "1Sa7406rSvm4Le6OmshAg_e2R4rmZLOiy", // note: clip 3 was a duplicate so removed
+    ],
   },
   {
     id: 6,
     name: "Red-winged Blackbird",
     scientific: "Agelaius phoeniceus",
-    slug: "red-winged-blackbird",
     image: "assets/birds/red-winged-blackbird.jpg",
+    driveIds: [
+      "1nBePAHNbxt0DHImviRcpubJJ9HyIPAEP",
+    ],
   },
   {
     id: 7,
     name: "Chipping Sparrow",
     scientific: "Spizella passerina",
-    slug: "chipping-sparrow",
     image: "assets/birds/chipping-sparrow.jpg",
+    driveIds: [
+      "1P7ZrEG66izy02HSr091n5CompHHisTmF",
+      "1aXKFEbhAMteqYizRFQKyuZfmtwFxjtm5",
+      "11KRghLLbCPYaafBcBJlKxMeteu-fPV-Q",
+      "1qPjugK0jOcVVCF5zjyQKn9pORB1YEZQX",
+    ],
   },
   {
     id: 8,
     name: "Mountain Bluebird",
     scientific: "Sialia currucoides",
-    slug: "mountain-bluebird",
     image: "assets/birds/mountain-bluebird.jpg",
+    driveIds: [
+      "1eFajlDqUZ9yGakr1FXOMyIQRRY0sSIEV",
+    ],
   },
   {
     id: 9,
     name: "Mourning Dove",
     scientific: "Zenaida macroura",
-    slug: "mourning-dove",
     image: "assets/birds/mourning-dove.jpg",
+    driveIds: [
+      "1c8ILzvKQfFDTrVRl2dwHuFrYDqBdh8NW",
+    ],
   },
   {
     id: 10,
     name: "American Goldfinch",
     scientific: "Spinus tristis",
-    slug: "american-goldfinch",
     image: "assets/birds/american-goldfinch.jpg",
+    driveIds: [
+      "1pI7W7AhXgNjQLrPxz1BcaEFleCC35Uq9",
+    ],
   },
   {
     id: 11,
     name: "Dark-eyed Junco",
     scientific: "Junco hyemalis",
-    slug: "dark-eyed-junco",
     image: "assets/birds/dark-eyed-junco.jpg",
+    driveIds: [
+      "1IWcw4cDfRjEJdvZOZ8F5UvOux2fdy8_s",
+      "1X3P9PvD-TJ4yACyXcp3piEUx7U98147C",
+      "1tbLg3NZM-X8dRaYdjrHQ8UWrebvcM_Bb",
+    ],
   },
   {
     id: 12,
     name: "Pine Siskin",
     scientific: "Spinus pinus",
-    slug: "pine-siskin",
     image: "assets/birds/pine-siskin.jpg",
+    driveIds: [
+      "16Ok3OMV_em5Kf2eoOxOYnx4qrn4Akz5n",
+      "14j6_zUJiVwoVHJsgevnx3wCufCtt3ZVN",
+    ],
   },
   {
     id: 13,
     name: "Mouse",
     scientific: "Mus musculus",
-    slug: "mouse",
     image: "assets/birds/mouse.jpg",
+    driveIds: [
+      "19AKI1miEUrTAHZziC4dVm6pqVFqFIwbi",
+    ],
   },
   {
     id: 14,
     name: "Midge",
     scientific: "Chironomidae",
-    slug: "midge",
     image: "assets/birds/midge.jpg",
+    driveIds: [
+      "14pB3DABJJZ9rlVVUOVoV_TPTWVIL-5la",
+    ],
   },
   {
     id: 15,
     name: "Common Raven",
     scientific: "Corvus corax",
-    slug: "common-raven",
     image: "assets/birds/common-raven.jpg",
+    driveIds: [
+      "1mLQH8PY8myg8Cmv781CoVX0ifZJpz9Fb",
+    ],
   },
   {
     id: 16,
     name: "Black-billed Magpie",
     scientific: "Pica hudsonia",
-    slug: "black-billed-magpie",
     image: "assets/birds/black-billed-magpie.jpg",
+    driveIds: [],
   },
 ];
 
@@ -146,8 +173,10 @@ const BIRDS = [
    APP LOGIC — No need to edit below this line
    ============================================= */
 
-// How many video slots to check per bird (increase if you ever have more)
-const MAX_VIDEOS = 4;
+// Builds a Google Drive embed URL from a file ID
+function driveEmbedUrl(id) {
+  return `https://drive.google.com/file/d/${id}/preview`;
+}
 
 const birdGrid      = document.getElementById("birdGrid");
 const videoPanel    = document.getElementById("videoPanel");
@@ -159,16 +188,10 @@ const clipsCount    = document.getElementById("clipsCount");
 let selectedCard   = null;
 let selectedBirdId = null;
 
-// Header stats — clip count updates dynamically as videos load
+// Header stats
+const totalClips = BIRDS.reduce((sum, b) => sum + b.driveIds.length, 0);
 speciesCount.textContent = BIRDS.length;
-clipsCount.textContent   = "…";
-
-// Count confirmed videos across all birds (updates as videos resolve)
-let confirmedClips = 0;
-function updateClipCount(delta) {
-  confirmedClips += delta;
-  clipsCount.textContent = confirmedClips;
-}
+clipsCount.textContent   = totalClips;
 
 // Build bird cards
 BIRDS.forEach(bird => {
@@ -181,7 +204,7 @@ BIRDS.forEach(bird => {
     <div class="bird-card-info">
       <div class="bird-card-name">${bird.name}</div>
       <div class="bird-card-scientific">${bird.scientific}</div>
-      <div class="bird-card-clips" id="clips-${bird.id}">&#9654; checking…</div>
+      <div class="bird-card-clips">${bird.driveIds.length > 0 ? `&#9654; ${bird.driveIds.length} clip${bird.driveIds.length !== 1 ? "s" : ""}` : ""}</div>
     </div>
   `;
   card.addEventListener("click", () => {
@@ -192,42 +215,9 @@ BIRDS.forEach(bird => {
     }
   });
   birdGrid.appendChild(card);
-
-  // Pre-check how many videos exist for this bird
-  checkVideoCount(bird);
 });
 
-// Silently checks which of the 4 slots exist for a bird
-// by attempting to fetch each file's headers
-function checkVideoCount(bird) {
-  let found = 0;
-  let checked = 0;
-
-  for (let i = 1; i <= MAX_VIDEOS; i++) {
-    const url = `assets/videos/${bird.slug}-${i}.mp4`;
-    fetch(url, { method: "HEAD" })
-      .then(res => {
-        if (res.ok) {
-          found++;
-          updateClipCount(1);
-        }
-      })
-      .finally(() => {
-        checked++;
-        if (checked === MAX_VIDEOS) {
-          // All slots checked — update the clip count on the card
-          const label = document.getElementById(`clips-${bird.id}`);
-          if (label) {
-            label.textContent = found > 0
-              ? `▶ ${found} clip${found !== 1 ? "s" : ""}`
-              : "";
-          }
-        }
-      });
-  }
-}
-
-// Returns the last card in the same visual row as the clicked card
+// Find the last card in the same visual row as the clicked card
 function getRowLastCard(clickedCard) {
   const cards = Array.from(birdGrid.querySelectorAll(".bird-card"));
   const clickedTop = clickedCard.getBoundingClientRect().top;
@@ -240,22 +230,46 @@ function getRowLastCard(clickedCard) {
   return lastInRow;
 }
 
-// Build the video panel for a bird, auto-detecting which slots exist
 function openPanel(bird, card) {
-  document.querySelectorAll("#videoGrid video").forEach(v => v.pause());
+  // Clear any existing iframes to stop playback
+  videoGrid.innerHTML = "";
 
   if (selectedCard) selectedCard.classList.remove("selected");
   card.classList.add("selected");
   selectedCard   = card;
   selectedBirdId = bird.id;
 
-  // Move panel to right after the last card in this row
+  // Move panel to after the last card in this row
   const rowLast = getRowLastCard(card);
   rowLast.after(videoPanel);
 
-  // Show a loading state while we figure out which videos exist
-  videoGrid.innerHTML = `<p class="no-clips-msg">Loading…</p>`;
+  // Populate videos
+  if (bird.driveIds.length === 0) {
+    videoGrid.innerHTML = `<p class="no-clips-msg">No clips yet — check back soon!</p>`;
+  } else {
+    bird.driveIds.forEach((id, index) => {
+      const vc = document.createElement("div");
+      vc.className = "video-card";
+      vc.innerHTML = `
+        <div class="video-wrapper">
+          <iframe
+            src="${driveEmbedUrl(id)}"
+            width="100%"
+            height="200"
+            frameborder="0"
+            allowfullscreen
+            allow="autoplay">
+          </iframe>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Clip ${index + 1}</div>
+        </div>
+      `;
+      videoGrid.appendChild(vc);
+    });
+  }
 
+  // Animate open
   videoPanel.classList.remove("open");
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
@@ -265,51 +279,11 @@ function openPanel(bird, card) {
       }, 60);
     });
   });
-
-  // Check all slots and build cards for ones that exist
-  const checks = [];
-  for (let i = 1; i <= MAX_VIDEOS; i++) {
-    const url = `assets/videos/${bird.slug}-${i}.mp4`;
-    checks.push(
-      fetch(url, { method: "HEAD" })
-        .then(res => ({ url, index: i, exists: res.ok }))
-        .catch(() => ({ url, index: i, exists: false }))
-    );
-  }
-
-  Promise.all(checks).then(results => {
-    // Only render if this bird is still the selected one
-    if (selectedBirdId !== bird.id) return;
-
-    const existing = results.filter(r => r.exists);
-
-    if (existing.length === 0) {
-      videoGrid.innerHTML = `<p class="no-clips-msg">No clips yet — check back soon!</p>`;
-      return;
-    }
-
-    videoGrid.innerHTML = "";
-    existing.forEach(({ url, index }) => {
-      const vc = document.createElement("div");
-      vc.className = "video-card";
-      vc.innerHTML = `
-        <div class="video-wrapper">
-          <video controls preload="metadata">
-            <source src="${url}" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="video-info">
-          <div class="video-title">Clip ${index}</div>
-        </div>
-      `;
-      videoGrid.appendChild(vc);
-    });
-  });
 }
 
 function closePanel() {
-  document.querySelectorAll("#videoGrid video").forEach(v => v.pause());
+  // Clear iframes to stop any playing video
+  videoGrid.innerHTML = "";
   videoPanel.classList.remove("open");
   if (selectedCard) selectedCard.classList.remove("selected");
   selectedCard   = null;
