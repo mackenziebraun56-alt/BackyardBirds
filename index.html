@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,6 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="site-header">
     <div class="logo">
       <span class="logo-icon">&#128247;</span>
@@ -27,23 +27,13 @@
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
   <main class="main-content">
     <div class="bird-grid" id="birdGrid">
 
-      <!-- Video panel lives inside the grid so it pushes rows down.
-           JavaScript will move it after whichever card is clicked. -->
+      <!-- Panel moves inside the grid after the clicked row -->
       <div class="video-panel" id="videoPanel">
-        <div class="video-panel-inner">
-          <div class="video-panel-header">
-            <div class="video-panel-title-group">
-              <span class="video-panel-bird-name" id="panelBirdName"></span>
-              <span class="video-panel-clip-count" id="panelClipCount"></span>
-            </div>
-            <button class="close-panel-btn" id="closePanelBtn" aria-label="Close">&#10005;</button>
-          </div>
-          <div class="video-grid" id="videoGrid"></div>
-        </div>
+        <button class="close-panel-btn" id="closePanelBtn" aria-label="Close">&#10005;</button>
+        <div class="video-grid" id="videoGrid"></div>
       </div>
 
     </div>
