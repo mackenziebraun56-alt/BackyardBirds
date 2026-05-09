@@ -1,3 +1,4 @@
+
 /* =============================================
    BIRD CAM — script.js
    ============================================= */
@@ -138,17 +139,23 @@ const BIRDS = [
    APP LOGIC — No need to edit below this line
    ============================================= */
 
-const birdGrid       = document.getElementById("birdGrid");
-const videoPanel     = document.getElementById("videoPanel");
-const videoGrid      = document.getElementById("videoGrid");
-const panelBirdName  = document.getElementById("panelBirdName");
-const panelClipCount = document.getElementById("panelClipCount");
-const closePanelBtn  = document.getElementById("closePanelBtn");
-const speciesCount   = document.getElementById("speciesCount");
-const clipsCount     = document.getElementById("clipsCount");
+const birdGrid      = document.getElementById("birdGrid");
+const videoPanel    = document.getElementById("videoPanel");
+const videoGrid     = document.getElementById("videoGrid");
+const closePanelBtn = document.getElementById("closePanelBtn");
+const speciesCount  = document.getElementById("speciesCount");
+const clipsCount    = document.getElementById("clipsCount");
 
 let selectedCard   = null;
 let selectedBirdId = null;
+
+// Wrap panel contents in a box div for styling
+const panelBox = document.createElement("div");
+panelBox.className = "video-panel-box";
+// Move existing children (close btn + video grid) into the box
+panelBox.appendChild(closePanelBtn);
+panelBox.appendChild(videoGrid);
+videoPanel.appendChild(panelBox);
 
 // Header stats
 const totalClips = BIRDS.reduce((sum, b) => sum + b.videos.length, 0);
@@ -179,13 +186,10 @@ BIRDS.forEach(bird => {
   birdGrid.appendChild(card);
 });
 
-// Find the last card in the same grid row as the clicked card,
-// then insert the panel right after it so it appears below that row.
+// Returns the last card in the same visual row as the clicked card
 function getRowLastCard(clickedCard) {
   const cards = Array.from(birdGrid.querySelectorAll(".bird-card"));
   const clickedTop = clickedCard.getBoundingClientRect().top;
-
-  // Find all cards whose top matches the clicked card (same row)
   let lastInRow = clickedCard;
   cards.forEach(c => {
     if (Math.abs(c.getBoundingClientRect().top - clickedTop) < 5) {
@@ -207,18 +211,14 @@ function openPanel(bird, card) {
   selectedCard   = card;
   selectedBirdId = bird.id;
 
-  // Move panel to right after the last card in this row
+  // Move panel directly after the last card in this row
   const rowLast = getRowLastCard(card);
   rowLast.after(videoPanel);
 
-  // Populate panel content
-  panelBirdName.textContent = bird.name;
-
+  // Populate videos
   if (bird.videos.length === 0) {
-    panelClipCount.textContent = "";
     videoGrid.innerHTML = `<p class="no-clips-msg">No clips yet — check back soon!</p>`;
   } else {
-    panelClipCount.textContent = `${bird.videos.length} clip${bird.videos.length !== 1 ? "s" : ""}`;
     videoGrid.innerHTML = "";
     bird.videos.forEach(video => {
       const vc = document.createElement("div");
@@ -239,21 +239,18 @@ function openPanel(bird, card) {
     });
   }
 
-  // Remove closing class, trigger open animation
+  // Animate in
   videoPanel.classList.remove("closing");
   videoPanel.classList.add("open");
 
-  // Scroll panel into view
   setTimeout(() => {
     videoPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, 60);
 }
 
 function closePanel() {
-  // Pause videos
   document.querySelectorAll("#videoGrid video").forEach(v => v.pause());
 
-  // Animate out
   videoPanel.classList.remove("open");
   videoPanel.classList.add("closing");
 
