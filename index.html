@@ -10,14 +10,11 @@
 
   <!-- HEADER -->
   <header class="site-header">
-    <div class="header-left">
-      <button class="back-btn hidden" id="backBtn">&#8592; All Birds</button>
-      <div class="logo" id="logo">
-        <span class="logo-icon">&#128247;</span>
-        <span class="logo-text">Bird Cam</span>
-      </div>
+    <div class="logo">
+      <span class="logo-icon">&#128247;</span>
+      <span class="logo-text">Bird Cam</span>
     </div>
-    <div class="header-stats" id="headerStats">
+    <div class="header-stats">
       <div class="stat">
         <span class="stat-number" id="speciesCount">0</span>
         <span class="stat-label">species</span>
@@ -28,22 +25,25 @@
         <span class="stat-label">clips</span>
       </div>
     </div>
-    <div class="header-bird-name hidden" id="headerBirdName"></div>
   </header>
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
 
-    <!-- BIRD GALLERY VIEW -->
-    <section id="galleryView">
-      <div class="bird-grid" id="birdGrid"></div>
-    </section>
+    <!-- BIRD GALLERY GRID -->
+    <div class="bird-grid" id="birdGrid"></div>
 
-    <!-- VIDEO DETAIL VIEW -->
-    <section id="detailView" class="hidden">
-      <p class="clip-count" id="clipCount"></p>
+    <!-- EXPANDABLE VIDEO PANEL (hidden until a bird is clicked) -->
+    <div class="video-panel" id="videoPanel">
+      <div class="video-panel-header">
+        <div class="video-panel-title-group">
+          <span class="video-panel-bird-name" id="panelBirdName"></span>
+          <span class="video-panel-clip-count" id="panelClipCount"></span>
+        </div>
+        <button class="close-panel-btn" id="closePanelBtn">&#10005;</button>
+      </div>
       <div class="video-grid" id="videoGrid"></div>
-    </section>
+    </div>
 
   </main>
 
