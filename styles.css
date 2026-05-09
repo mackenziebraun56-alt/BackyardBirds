@@ -26,7 +26,7 @@ body {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(220, 215, 205, 0.6);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -85,11 +85,14 @@ body {
   margin: 0 auto;
 }
 
-/* --- Bird Grid --- */
+/* --- Bird Grid ---
+   column-gap stays, but row-gap is handled
+   manually so the panel can sit flush. */
 .bird-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 18px;
+  column-gap: 18px;
+  row-gap: 18px;
   align-items: start;
 }
 
@@ -102,18 +105,21 @@ body {
   cursor: pointer;
   border: 2px solid transparent;
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.2s;
-  will-change: transform;
 }
 
 .bird-card:hover {
-  transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.13);
 }
 
+/* Selected card: bottom corners go square to "connect" to panel below */
 .bird-card.selected {
-  border-color: #5a8f6a;
-  box-shadow: 0 0 0 4px rgba(90, 143, 106, 0.22), 0 8px 24px rgba(0,0,0,0.12);
-  transform: translateY(-3px);
+  border-color: rgba(90, 143, 106, 0.7);
+  box-shadow: 0 0 0 3px rgba(90, 143, 106, 0.18);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  transform: translateY(-2px);
+  z-index: 2;
 }
 
 .bird-card img {
@@ -126,18 +132,17 @@ body {
 
 .bird-card:hover img,
 .bird-card.selected img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
-/* Gradient overlay */
 .bird-card-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.7)  0%,
-    rgba(0, 0, 0, 0.12) 55%,
-    transparent         100%
+    rgba(0, 0, 0, 0.68)  0%,
+    rgba(0, 0, 0, 0.10)  55%,
+    transparent          100%
   );
   transition: background 0.3s;
 }
@@ -145,9 +150,9 @@ body {
 .bird-card.selected .bird-card-overlay {
   background: linear-gradient(
     to top,
-    rgba(20, 65, 35, 0.78) 0%,
-    rgba(0,  0,  0,  0.1)  55%,
-    transparent            100%
+    rgba(20, 60, 32, 0.75)  0%,
+    rgba(0,  0,  0,  0.08)  55%,
+    transparent             100%
   );
 }
 
@@ -181,140 +186,112 @@ body {
 
 /* -----------------------------------------------
    VIDEO PANEL
-   Sits inside the grid, spans all columns.
-   Hidden by default; .open animates it in.
+   Spans the full row. Negative margin-top pulls
+   it flush against the row above (no gap).
+   Bottom corners are rounded; top corners square
+   so it looks like it grows from the cards.
 ----------------------------------------------- */
 .video-panel {
   grid-column: 1 / -1;
-  display: none;            /* removed from flow when closed */
-  overflow: hidden;
+  display: none;
+  /* Pull up tight against the card row above */
+  margin-top: calc(-18px + 2px);
+  position: relative;
+  z-index: 1;
 }
 
 .video-panel.open {
   display: block;
-  animation: panelSlideDown 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: panelIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .video-panel.closing {
   display: block;
-  animation: panelSlideUp 0.28s ease-in forwards;
+  animation: panelOut 0.22s ease-in forwards;
 }
 
-@keyframes panelSlideDown {
-  from { opacity: 0; transform: translateY(-10px); }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(-6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes panelSlideUp {
+@keyframes panelOut {
   from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 0; transform: translateY(-6px); }
 }
 
-/* The frosted glass box */
-.video-panel-inner {
-  background: rgba(255, 255, 255, 0.58);
-  backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 20px;
+/* Tinted glass box — top corners square, bottom rounded */
+.video-panel-box {
+  background: rgba(30, 28, 24, 0.18);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-top: none;
+  border-radius: 0 0 20px 20px;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.10),
-    0 2px  8px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255,255,255,0.9);
+    0 10px 30px rgba(0, 0, 0, 0.15),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
   overflow: hidden;
 }
 
-/* Small triangle pointer pointing up toward the selected card */
-.video-panel-inner::before {
-  content: '';
-  display: block;
-  width: 0;
-  height: 0;
-  margin: 0 auto;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid rgba(255, 255, 255, 0.65);
-  position: relative;
-  top: 0;
-}
-
-.video-panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 22px 14px;
-  border-bottom: 1px solid rgba(200, 195, 185, 0.4);
-}
-
-.video-panel-title-group {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-
-.video-panel-bird-name {
-  font-size: 19px;
-  font-weight: 600;
-  color: #1a1a1a;
-}
-
-.video-panel-clip-count {
-  font-size: 12px;
-  color: #888;
-}
-
+/* Close button — top right corner */
 .close-panel-btn {
-  background: rgba(0,0,0,0.06);
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: rgba(0, 0, 0, 0.18);
   border: none;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 14px;
-  color: #666;
+  width: 28px;
+  height: 28px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s;
+  z-index: 5;
 }
 
 .close-panel-btn:hover {
-  background: rgba(0,0,0,0.12);
-  color: #1a1a1a;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
 }
 
 /* No clips message */
 .no-clips-msg {
   padding: 28px 22px;
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
   font-style: italic;
 }
 
-/* --- Video Grid inside panel --- */
+/* --- Video Grid --- */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
-  padding: 18px 22px 22px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 14px;
+  padding: 16px 18px 20px;
 }
 
 /* --- Video Card --- */
 .video-card {
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(210, 205, 195, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .video-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .video-wrapper {
-  background: #111;
+  background: #000;
 }
 
 .video-wrapper video {
@@ -325,18 +302,18 @@ body {
 }
 
 .video-info {
-  padding: 11px 14px 13px;
+  padding: 10px 13px 12px;
 }
 
 .video-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .video-date {
   font-size: 12px;
-  color: #888;
+  color: rgba(255, 255, 255, 0.55);
   margin-top: 3px;
 }
 
@@ -347,13 +324,16 @@ body {
 
   .bird-grid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
+    column-gap: 12px;
+    row-gap: 12px;
+  }
+
+  .video-panel {
+    margin-top: calc(-12px + 2px);
   }
 
   .video-grid {
     grid-template-columns: 1fr;
-    padding: 14px 14px 18px;
+    padding: 14px 12px 16px;
   }
-
-  .video-panel-header { padding: 14px 14px 12px; }
 }
