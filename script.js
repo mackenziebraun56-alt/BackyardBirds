@@ -6,165 +6,132 @@
 /* =============================================
    YOUR DATA — Edit this section to add your
    own birds and videos!
+
+   For images: add your photos to assets/birds/
+   For videos: add your clips to assets/videos/
    ============================================= */
 
 const BIRDS = [
   {
     id: 1,
-    name: "American Robin",
-    scientific: "Turdus migratorius",
-    // Image shown on the bird card. Use a URL or a local file path like "images/robin.jpg"
-    image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=600&q=80",
+    name: "Spotted Towhee",
+    scientific: "Pipilo maculatus",
+    image: "assets/birds/spotted-towhee.jpg",
     videos: [
-      {
-        title: "Morning visit",
-        date: "May 7, 2025",
-        duration: "0:42",
-        // Thumbnail image for the video card
-        thumb: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&q=70",
-        // Link to the actual video file, e.g. "videos/robin-morning.mp4"
-        // Leave as "" if you don't have a video yet
-        videoUrl: "",
-      },
-      {
-        title: "Feeding at dusk",
-        date: "May 6, 2025",
-        duration: "1:15",
-        thumb: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&q=70",
-        videoUrl: "",
-      },
-      {
-        title: "Pair spotted",
-        date: "May 4, 2025",
-        duration: "0:28",
-        thumb: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&q=70",
-        videoUrl: "",
-      },
+      // Add your videos like this:
+      // {
+      //   title: "Morning visit",
+      //   date: "May 9, 2025",
+      //   duration: "0:42",
+      //   thumb: "assets/birds/spotted-towhee.jpg",
+      //   videoUrl: "assets/videos/spotted-towhee-morning-visit.mp4",
+      // },
     ],
   },
   {
     id: 2,
-    name: "Blue Jay",
-    scientific: "Cyanocitta cristata",
-    image: "https://images.unsplash.com/photo-1591608971362-f08b2a75731a?w=600&q=80",
-    videos: [
-      {
-        title: "Acorn collection",
-        date: "May 8, 2025",
-        duration: "2:03",
-        thumb: "https://images.unsplash.com/photo-1591608971362-f08b2a75731a?w=400&q=70",
-        videoUrl: "",
-      },
-      {
-        title: "Chasing sparrow",
-        date: "May 5, 2025",
-        duration: "0:55",
-        thumb: "https://images.unsplash.com/photo-1591608971362-f08b2a75731a?w=400&q=70",
-        videoUrl: "",
-      },
-    ],
+    name: "Say's Phoebe",
+    scientific: "Sayornis saya",
+    image: "assets/birds/says-phoebe.jpg",
+    videos: [],
   },
   {
     id: 3,
-    name: "Northern Cardinal",
-    scientific: "Cardinalis cardinalis",
-    image: "https://images.unsplash.com/photo-1638378384673-0c1d5b5c879b?w=600&q=80",
-    videos: [
-      {
-        title: "Male at feeder",
-        date: "May 9, 2025",
-        duration: "1:30",
-        thumb: "https://images.unsplash.com/photo-1638378384673-0c1d5b5c879b?w=400&q=70",
-        videoUrl: "",
-      },
-      {
-        title: "Female spotted",
-        date: "May 8, 2025",
-        duration: "0:47",
-        thumb: "https://images.unsplash.com/photo-1638378384673-0c1d5b5c879b?w=400&q=70",
-        videoUrl: "",
-      },
-      {
-        title: "Pair singing",
-        date: "May 7, 2025",
-        duration: "3:12",
-        thumb: "https://images.unsplash.com/photo-1638378384673-0c1d5b5c879b?w=400&q=70",
-        videoUrl: "",
-      },
-      {
-        title: "Dawn arrival",
-        date: "May 6, 2025",
-        duration: "0:22",
-        thumb: "https://images.unsplash.com/photo-1638378384673-0c1d5b5c879b?w=400&q=70",
-        videoUrl: "",
-      },
-    ],
+    name: "American Robin",
+    scientific: "Turdus migratorius",
+    image: "assets/birds/american-robin.jpg",
+    videos: [],
   },
   {
     id: 4,
-    name: "Black-capped Chickadee",
-    scientific: "Poecile atricapillus",
-    image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&q=80",
-    videos: [
-      {
-        title: "Sunflower seed grab",
-        date: "May 9, 2025",
-        duration: "0:18",
-        thumb: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=400&q=70",
-        videoUrl: "",
-      },
-      {
-        title: "Three at once",
-        date: "May 7, 2025",
-        duration: "1:04",
-        thumb: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=400&q=70",
-        videoUrl: "",
-      },
-    ],
+    name: "Pigeon",
+    scientific: "Columba livia",
+    image: "assets/birds/pigeon.jpg",
+    videos: [],
   },
   {
     id: 5,
-    name: "Downy Woodpecker",
-    scientific: "Dryobates pubescens",
-    image: "https://images.unsplash.com/photo-1608855238293-a8853e7f7c98?w=600&q=80",
-    videos: [
-      {
-        title: "Suet feeder visit",
-        date: "May 5, 2025",
-        duration: "1:48",
-        thumb: "https://images.unsplash.com/photo-1608855238293-a8853e7f7c98?w=400&q=70",
-        videoUrl: "",
-      },
-    ],
+    name: "House Finch",
+    scientific: "Haemorhous mexicanus",
+    image: "assets/birds/house-finch.jpg",
+    videos: [],
   },
   {
     id: 6,
-    name: "House Finch",
-    scientific: "Haemorhous mexicanus",
-    image: "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=600&q=80",
-    videos: [
-      {
-        title: "Morning chorus",
-        date: "May 9, 2025",
-        duration: "2:34",
-        thumb: "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=400&q=70",
-        videoUrl: "",
-      },
-      {
-        title: "Nest material",
-        date: "May 6, 2025",
-        duration: "0:51",
-        thumb: "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=400&q=70",
-        videoUrl: "",
-      },
-      {
-        title: "Group feeding",
-        date: "May 4, 2025",
-        duration: "1:22",
-        thumb: "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=400&q=70",
-        videoUrl: "",
-      },
-    ],
+    name: "Black-headed Grosbeak",
+    scientific: "Pheucticus melanocephalus",
+    image: "assets/birds/grosbeak.jpg",
+    videos: [],
+  },
+  {
+    id: 7,
+    name: "Chipping Sparrow",
+    scientific: "Spizella passerina",
+    image: "assets/birds/chipping-sparrow.jpg",
+    videos: [],
+  },
+  {
+    id: 8,
+    name: "Mountain Bluebird",
+    scientific: "Sialia currucoides",
+    image: "assets/birds/mountain-bluebird.jpg",
+    videos: [],
+  },
+  {
+    id: 9,
+    name: "Mourning Dove",
+    scientific: "Zenaida macroura",
+    image: "assets/birds/mourning-dove.jpg",
+    videos: [],
+  },
+  {
+    id: 10,
+    name: "American Goldfinch",
+    scientific: "Spinus tristis",
+    image: "assets/birds/american-goldfinch.jpg",
+    videos: [],
+  },
+  {
+    id: 11,
+    name: "Dark-eyed Junco",
+    scientific: "Junco hyemalis",
+    image: "assets/birds/dark-eyed-junco.jpg",
+    videos: [],
+  },
+  {
+    id: 12,
+    name: "Pine Siskin",
+    scientific: "Spinus pinus",
+    image: "assets/birds/pine-siskin.jpg",
+    videos: [],
+  },
+  {
+    id: 13,
+    name: "Mouse",
+    scientific: "Mus musculus",
+    image: "assets/birds/mouse.jpg",
+    videos: [],
+  },
+  {
+    id: 14,
+    name: "Midge",
+    scientific: "Chironomidae",
+    image: "assets/birds/midge.jpg",
+    videos: [],
+  },
+  {
+    id: 15,
+    name: "Common Raven",
+    scientific: "Corvus corax",
+    image: "assets/birds/common-raven.jpg",
+    videos: [],
+  },
+  {
+    id: 16,
+    name: "Black-billed Magpie",
+    scientific: "Pica hudsonia",
+    image: "assets/birds/black-billed-magpie.jpg",
+    videos: [],
   },
 ];
 
@@ -173,17 +140,17 @@ const BIRDS = [
    ============================================= */
 
 // Grab elements
-const galleryView   = document.getElementById("galleryView");
-const detailView    = document.getElementById("detailView");
-const birdGrid      = document.getElementById("birdGrid");
-const videoGrid     = document.getElementById("videoGrid");
-const backBtn       = document.getElementById("backBtn");
-const logo          = document.getElementById("logo");
-const headerStats   = document.getElementById("headerStats");
+const galleryView    = document.getElementById("galleryView");
+const detailView     = document.getElementById("detailView");
+const birdGrid       = document.getElementById("birdGrid");
+const videoGrid      = document.getElementById("videoGrid");
+const backBtn        = document.getElementById("backBtn");
+const logo           = document.getElementById("logo");
+const headerStats    = document.getElementById("headerStats");
 const headerBirdName = document.getElementById("headerBirdName");
-const speciesCount  = document.getElementById("speciesCount");
-const clipsCount    = document.getElementById("clipsCount");
-const clipCount     = document.getElementById("clipCount");
+const speciesCount   = document.getElementById("speciesCount");
+const clipsCount     = document.getElementById("clipsCount");
+const clipCount      = document.getElementById("clipCount");
 
 // Fill in header stats
 const totalClips = BIRDS.reduce((sum, bird) => sum + bird.videos.length, 0);
@@ -221,7 +188,11 @@ function showBird(bird) {
   headerBirdName.classList.remove("hidden");
 
   // Set clip count label
-  clipCount.textContent = `${bird.videos.length} clip${bird.videos.length !== 1 ? "s" : ""} captured`;
+  if (bird.videos.length === 0) {
+    clipCount.textContent = "No clips yet — check back soon!";
+  } else {
+    clipCount.textContent = `${bird.videos.length} clip${bird.videos.length !== 1 ? "s" : ""} captured`;
+  }
 
   // Build video cards
   videoGrid.innerHTML = "";
