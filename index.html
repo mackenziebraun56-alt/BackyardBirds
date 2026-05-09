@@ -30,10 +30,12 @@
   <main class="main-content">
     <div class="bird-grid" id="birdGrid">
 
-      <!-- Panel moves inside the grid after the clicked row -->
+      <!-- Panel sits inside the grid. JS moves it after the clicked row. -->
       <div class="video-panel" id="videoPanel">
-        <button class="close-panel-btn" id="closePanelBtn" aria-label="Close">&#10005;</button>
-        <div class="video-grid" id="videoGrid"></div>
+        <div class="video-panel-box">
+          <button class="close-panel-btn" id="closePanelBtn" aria-label="Close">&#10005;</button>
+          <div class="video-grid" id="videoGrid"></div>
+        </div>
       </div>
 
     </div>
