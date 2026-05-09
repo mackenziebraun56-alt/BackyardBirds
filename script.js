@@ -1,16 +1,15 @@
-
 /* =============================================
    BIRD CAM — script.js
    ============================================= */
 
 
 /* =============================================
-   YOUR DATA — Edit this section to add your
-   own birds and videos!
+   YOUR DATA — Edit this section to add birds
+   and videos as you go!
 
-   For images: replace the image URL with your
-   own file path e.g. "assets/birds/robin.jpg"
-   For videos: add your clips to assets/videos/
+   Video naming convention:
+   assets/videos/bird-name-description.mp4
+   e.g. assets/videos/american-robin-morning-visit.mp4
    ============================================= */
 
 const BIRDS = [
@@ -18,10 +17,9 @@ const BIRDS = [
     id: 1,
     name: "Spotted Towhee",
     scientific: "Pipilo maculatus",
-    // PLACEHOLDER — replace with: "assets/birds/spotted-towhee.jpg"
-    image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=600&q=80",
+    image: "assets/birds/spotted-towhee.jpg",
     videos: [
-      // Add your videos like this:
+      // Add your clips like this:
       // {
       //   title: "Morning visit",
       //   date: "May 9, 2025",
@@ -35,120 +33,105 @@ const BIRDS = [
     id: 2,
     name: "Say's Phoebe",
     scientific: "Sayornis saya",
-    // PLACEHOLDER — replace with: "assets/birds/says-phoebe.jpg"
-    image: "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=600&q=80",
+    image: "assets/birds/says-phoebe.jpg",
     videos: [],
   },
   {
     id: 3,
     name: "American Robin",
     scientific: "Turdus migratorius",
-    // PLACEHOLDER — replace with: "assets/birds/american-robin.jpg"
-    image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=600&q=80",
+    image: "assets/birds/american-robin.jpg",
     videos: [],
   },
   {
     id: 4,
     name: "Pigeon",
     scientific: "Columba livia",
-    // PLACEHOLDER — replace with: "assets/birds/pigeon.jpg"
-    image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&q=80",
+    image: "assets/birds/pigeon.jpg",
     videos: [],
   },
   {
     id: 5,
     name: "House Finch",
     scientific: "Haemorhous mexicanus",
-    // PLACEHOLDER — replace with: "assets/birds/house-finch.jpg"
-    image: "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=600&q=80",
+    image: "assets/birds/house-finch.jpg",
     videos: [],
   },
   {
     id: 6,
     name: "Black-headed Grosbeak",
     scientific: "Pheucticus melanocephalus",
-    // PLACEHOLDER — replace with: "assets/birds/grosbeak.jpg"
-    image: "https://images.unsplash.com/photo-1638378384673-0c1d5b5c879b?w=600&q=80",
+    image: "assets/birds/grosbeak.jpg",
     videos: [],
   },
   {
     id: 7,
     name: "Chipping Sparrow",
     scientific: "Spizella passerina",
-    // PLACEHOLDER — replace with: "assets/birds/chipping-sparrow.jpg"
-    image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=600&q=80",
+    image: "assets/birds/chipping-sparrow.jpg",
     videos: [],
   },
   {
     id: 8,
     name: "Mountain Bluebird",
     scientific: "Sialia currucoides",
-    // PLACEHOLDER — replace with: "assets/birds/mountain-bluebird.jpg"
-    image: "https://images.unsplash.com/photo-1591608971362-f08b2a75731a?w=600&q=80",
+    image: "assets/birds/mountain-bluebird.jpg",
     videos: [],
   },
   {
     id: 9,
     name: "Mourning Dove",
     scientific: "Zenaida macroura",
-    // PLACEHOLDER — replace with: "assets/birds/mourning-dove.jpg"
-    image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&q=80",
+    image: "assets/birds/mourning-dove.jpg",
     videos: [],
   },
   {
     id: 10,
     name: "American Goldfinch",
     scientific: "Spinus tristis",
-    // PLACEHOLDER — replace with: "assets/birds/american-goldfinch.jpg"
-    image: "https://images.unsplash.com/photo-1608855238293-a8853e7f7c98?w=600&q=80",
+    image: "assets/birds/american-goldfinch.jpg",
     videos: [],
   },
   {
     id: 11,
     name: "Dark-eyed Junco",
     scientific: "Junco hyemalis",
-    // PLACEHOLDER — replace with: "assets/birds/dark-eyed-junco.jpg"
-    image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=600&q=80",
+    image: "assets/birds/dark-eyed-junco.jpg",
     videos: [],
   },
   {
     id: 12,
     name: "Pine Siskin",
     scientific: "Spinus pinus",
-    // PLACEHOLDER — replace with: "assets/birds/pine-siskin.jpg"
-    image: "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=600&q=80",
+    image: "assets/birds/pine-siskin.jpg",
     videos: [],
   },
   {
     id: 13,
     name: "Mouse",
     scientific: "Mus musculus",
-    // PLACEHOLDER — replace with: "assets/birds/mouse.jpg"
-    image: "https://images.unsplash.com/photo-1552728089-57bdde30beb3?w=600&q=80",
+    image: "assets/birds/mouse.jpg",
     videos: [],
   },
   {
     id: 14,
     name: "Midge",
     scientific: "Chironomidae",
-    // PLACEHOLDER — replace with: "assets/birds/midge.jpg"
-    image: "https://images.unsplash.com/photo-1608855238293-a8853e7f7c98?w=600&q=80",
+    image: "assets/birds/midge.jpg",
     videos: [],
   },
   {
     id: 15,
     name: "Common Raven",
     scientific: "Corvus corax",
-    // PLACEHOLDER — replace with: "assets/birds/common-raven.jpg"
-    image: "https://images.unsplash.com/photo-1638378384673-0c1d5b5c879b?w=600&q=80",
+    image: "assets/birds/common-raven.jpg",
     videos: [],
   },
   {
     id: 16,
     name: "Black-billed Magpie",
     scientific: "Pica hudsonia",
-    // PLACEHOLDER — replace with: "assets/birds/black-billed-magpie.jpg"
-    image: "https://images.unsplash.com/photo-1591608971362-f08b2a75731a?w=600&q=80",
+    image: "assets/birds/black-billed-magpie.jpg",
     videos: [],
   },
 ];
@@ -169,6 +152,76 @@ const headerBirdName = document.getElementById("headerBirdName");
 const speciesCount   = document.getElementById("speciesCount");
 const clipsCount     = document.getElementById("clipsCount");
 const clipCount      = document.getElementById("clipCount");
+
+// Video player overlay elements (injected once into the page)
+const overlay = document.createElement("div");
+overlay.id = "videoOverlay";
+overlay.style.cssText = `
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+`;
+overlay.innerHTML = `
+  <button id="closePlayer" style="
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+  ">&times;</button>
+  <p id="overlayTitle" style="
+    color: #fff;
+    font-size: 16px;
+    margin: 0 0 12px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  "></p>
+  <video id="videoPlayer" controls style="
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 10px;
+    background: #000;
+  ">
+    Your browser does not support the video tag.
+  </video>
+`;
+document.body.appendChild(overlay);
+
+const videoPlayer   = document.getElementById("videoPlayer");
+const overlayTitle  = document.getElementById("overlayTitle");
+const closePlayerBtn = document.getElementById("closePlayer");
+
+// Open the video player overlay
+function openVideo(video) {
+  overlayTitle.textContent = video.title;
+  videoPlayer.src = video.videoUrl;
+  overlay.style.display = "flex";
+  videoPlayer.play();
+}
+
+// Close the video player overlay
+function closeVideo() {
+  overlay.style.display = "none";
+  videoPlayer.pause();
+  videoPlayer.src = "";
+}
+
+closePlayerBtn.addEventListener("click", closeVideo);
+overlay.addEventListener("click", (e) => {
+  if (e.target === overlay) closeVideo();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeVideo();
+});
 
 // Fill in header stats
 const totalClips = BIRDS.reduce((sum, bird) => sum + bird.videos.length, 0);
@@ -194,25 +247,21 @@ BIRDS.forEach(bird => {
 
 // Show a bird's video detail page
 function showBird(bird) {
-  // Swap views
   galleryView.classList.add("hidden");
   detailView.classList.remove("hidden");
 
-  // Update header
   logo.classList.add("hidden");
   headerStats.classList.add("hidden");
   backBtn.classList.remove("hidden");
   headerBirdName.textContent = bird.name;
   headerBirdName.classList.remove("hidden");
 
-  // Set clip count label
   if (bird.videos.length === 0) {
     clipCount.textContent = "No clips yet — check back soon!";
   } else {
     clipCount.textContent = `${bird.videos.length} clip${bird.videos.length !== 1 ? "s" : ""} captured`;
   }
 
-  // Build video cards
   videoGrid.innerHTML = "";
   bird.videos.forEach(video => {
     const card = document.createElement("div");
@@ -233,10 +282,8 @@ function showBird(bird) {
       </div>
     `;
 
-    // If there's a real video URL, open it when clicked
-    if (video.videoUrl) {
-      card.addEventListener("click", () => window.open(video.videoUrl, "_blank"));
-    }
+    // Click opens the inline video player
+    card.addEventListener("click", () => openVideo(video));
 
     videoGrid.appendChild(card);
   });
