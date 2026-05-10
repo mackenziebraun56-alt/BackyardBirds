@@ -123,7 +123,7 @@ body {
 
 /* Selected: sage green border, bottom flattens to connect with panel */
 .bird-card.selected {
-  border-color: #A3B18A;
+  border-color: #8C9DAD;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom: none;
@@ -206,17 +206,20 @@ body {
 ----------------------------------------------- */
 .video-panel {
   grid-column: 1 / -1;
-  height: 0;
+  max-height: 0;
   overflow: hidden;
   opacity: 0;
   margin-top: 0;
-  transition: opacity 0.3s ease, margin-top 0.25s ease;
+  transition:
+    max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity    0.3s  ease,
+    margin-top 0.25s ease;
   position: relative;
   z-index: 2;
 }
 
 .video-panel.open {
-  height: auto;
+  max-height: 900px;
   opacity: 1;
   overflow: visible;
   margin-top: -14px;
@@ -264,14 +267,14 @@ body {
 
 .clip-tab:hover {
   background: rgba(163, 177, 138, 0.15);
-  border-color: #A3B18A;
+  border-color: #8C9DAD;
   color: #635147;
 }
 
 /* Active tab uses sage green */
 .clip-tab.active {
-  background: #A3B18A;
-  border-color: #A3B18A;
+  background: #8C9DAD;
+  border-color: #8C9DAD;
   color: #fff;
   font-weight: 600;
 }
