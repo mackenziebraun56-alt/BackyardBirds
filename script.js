@@ -1,18 +1,13 @@
+
 /* =============================================
    BIRD CAM — script.js
    ============================================= */
 
-
 /* =============================================
    YOUR DATA
 
-   To add more videos, paste the Google Drive
+   To add a video, just paste the Google Drive
    file ID into the driveIds array for that bird.
-   Get the ID from the share link:
-   drive.google.com/file/d/ --> ID <-- /view
-
-   To add a new bird, copy an existing entry
-   and fill in the details.
    ============================================= */
 
 const BIRDS = [
@@ -61,7 +56,7 @@ const BIRDS = [
     image: "assets/birds/house-finch.jpg",
     driveIds: [
       "1bCuSCDtr0aHcsrF6n_Hp0nROVrgXCpMv",
-      "1Sa7406rSvm4Le6OmshAg_e2R4rmZLOiy", // note: clip 3 was a duplicate so removed
+      "1Sa7406rSvm4Le6OmshAg_e2R4rmZLOiy",
     ],
   },
   {
@@ -173,14 +168,14 @@ const BIRDS = [
    APP LOGIC — No need to edit below this line
    ============================================= */
 
-// Builds a Google Drive embed URL from a file ID
 function driveEmbedUrl(id) {
   return `https://drive.google.com/file/d/${id}/preview`;
 }
 
 const birdGrid      = document.getElementById("birdGrid");
 const videoPanel    = document.getElementById("videoPanel");
-const videoGrid     = document.getElementById("videoGrid");
+const tabStrip      = document.getElementById("tabStrip");
+const videoStage    = document.getElementById("videoStage");
 const closePanelBtn = document.getElementById("closePanelBtn");
 const speciesCount  = document.getElementById("speciesCount");
 const clipsCount    = document.getElementById("clipsCount");
@@ -230,11 +225,29 @@ function getRowLastCard(clickedCard) {
   return lastInRow;
 }
 
-function openPanel(bird, card) {
-  // Clear any existing iframes to stop playback
-  videoGrid.innerHTML = "";
+// Load a specific clip into the video stage
+function loadClip(driveId, tabs, index) {
+  // Update active tab
+  tabs.forEach((t, i) => t.classList.toggle("active", i === index));
 
+  // Swap the iframe
+  videoStage.innerHTML = `
+    <iframe
+      src="${driveEmbedUrl(driveId)}"
+      frameborder="0"
+      allowfullscreen
+      allow="autoplay">
+    </iframe>
+  `;
+}
+
+function openPanel(bird, card) {
+  // Clear stage to stop any playing video
+  videoStage.innerHTML = "";
+
+  // Deselect old card
   if (selectedCard) selectedCard.classList.remove("selected");
+
   card.classList.add("selected");
   selectedCard   = card;
   selectedBirdId = bird.id;
@@ -243,30 +256,23 @@ function openPanel(bird, card) {
   const rowLast = getRowLastCard(card);
   rowLast.after(videoPanel);
 
-  // Populate videos
+  // Build tab strip — clear existing tabs (keep close button)
+  Array.from(tabStrip.querySelectorAll(".clip-tab")).forEach(t => t.remove());
+
   if (bird.driveIds.length === 0) {
-    videoGrid.innerHTML = `<p class="no-clips-msg">No clips yet — check back soon!</p>`;
+    videoStage.innerHTML = `<p class="no-clips-msg">No clips yet — check back soon!</p>`;
   } else {
-    bird.driveIds.forEach((id, index) => {
-      const vc = document.createElement("div");
-      vc.className = "video-card";
-      vc.innerHTML = `
-        <div class="video-wrapper">
-          <iframe
-            src="${driveEmbedUrl(id)}"
-            width="100%"
-            height="100%"
-            frameborder="0"
-            allowfullscreen
-            allow="autoplay">
-          </iframe>
-        </div>
-        <div class="video-info">
-          <div class="video-title">Clip ${index + 1}</div>
-        </div>
-      `;
-      videoGrid.appendChild(vc);
+    const tabs = bird.driveIds.map((id, i) => {
+      const tab = document.createElement("button");
+      tab.className = "clip-tab";
+      tab.textContent = `Clip ${i + 1}`;
+      tab.addEventListener("click", () => loadClip(id, tabs, i));
+      tabStrip.insertBefore(tab, closePanelBtn);
+      return tab;
     });
+
+    // Load first clip by default
+    loadClip(bird.driveIds[0], tabs, 0);
   }
 
   // Animate open
@@ -282,8 +288,7 @@ function openPanel(bird, card) {
 }
 
 function closePanel() {
-  // Clear iframes to stop any playing video
-  videoGrid.innerHTML = "";
+  videoStage.innerHTML = "";
   videoPanel.classList.remove("open");
   if (selectedCard) selectedCard.classList.remove("selected");
   selectedCard   = null;
