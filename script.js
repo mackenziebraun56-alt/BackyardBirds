@@ -1,4 +1,3 @@
-
 /* =============================================
    BIRD CAM — script.js
    ============================================= */
@@ -235,8 +234,8 @@ function loadClip(driveId, tabs, index) {
     <iframe
       src="${driveEmbedUrl(driveId)}"
       frameborder="0"
-      allowfullscreen
-      allow="autoplay">
+      allow="fullscreen; autoplay"
+      allowfullscreen>
     </iframe>
   `;
 }
