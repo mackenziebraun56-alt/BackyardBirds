@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,12 +16,12 @@
     <div class="header-stats">
       <div class="stat">
         <span class="stat-number" id="speciesCount">0</span>
-        <span class="stat-label">species</span>
+        <span class="stat-label">Species</span>
       </div>
       <div class="stat-divider"></div>
       <div class="stat">
         <span class="stat-number" id="clipsCount">0</span>
-        <span class="stat-label">clips</span>
+        <span class="stat-label">Clips</span>
       </div>
     </div>
   </header>
@@ -30,11 +29,19 @@
   <main class="main-content">
     <div class="bird-grid" id="birdGrid">
 
-      <!-- Panel sits inside the grid. JS moves it after the clicked row. -->
+      <!-- Panel: tab strip + full-width video -->
       <div class="video-panel" id="videoPanel">
         <div class="video-panel-box">
-          <button class="close-panel-btn" id="closePanelBtn" aria-label="Close">&#10005;</button>
-          <div class="video-grid" id="videoGrid"></div>
+
+          <!-- Tab strip -->
+          <div class="tab-strip" id="tabStrip">
+            <!-- Tabs injected by JS -->
+            <button class="close-panel-btn" id="closePanelBtn" aria-label="Close">&#10005;</button>
+          </div>
+
+          <!-- Full-width video area -->
+          <div class="video-stage" id="videoStage"></div>
+
         </div>
       </div>
 
