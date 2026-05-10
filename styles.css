@@ -21,7 +21,7 @@
 body {
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
   background: #EEEAE3;
-  color: #635147;
+  color: #fff;
   min-height: 100vh;
 }
 
@@ -31,10 +31,10 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 18px 36px;
-  background: rgba(238, 234, 227, 0.88);
+  background: rgba(140, 157, 173, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(99, 81, 71, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -51,7 +51,7 @@ body {
 .logo-text {
   font-size: 18px;
   font-weight: 600;
-  color: #635147;
+  color: #fff;
   letter-spacing: -0.3px;
 }
 
@@ -70,13 +70,13 @@ body {
 .stat-number {
   font-size: 20px;
   font-weight: 600;
-  color: #635147;
+  color: #fff;
   line-height: 1;
 }
 
 .stat-label {
   font-size: 10px;
-  color: rgba(99, 81, 71, 0.45);
+  color: rgba(255, 255, 255, 0.65);
   margin-top: 2px;
   text-transform: uppercase;
   letter-spacing: 0.6px;
@@ -85,7 +85,7 @@ body {
 .stat-divider {
   width: 1px;
   height: 28px;
-  background: rgba(99, 81, 71, 0.18);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* --- Main --- */
@@ -123,7 +123,7 @@ body {
 
 /* Selected: sage green border, bottom flattens to connect with panel */
 .bird-card.selected {
-  border-color: #8C9DAD;
+  border-color: #A3B18A;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom: none;
@@ -221,14 +221,12 @@ body {
 .video-panel.open {
   max-height: 900px;
   opacity: 1;
-  overflow: visible;
   margin-top: -14px;
 }
 
 .video-panel-box {
   background: #F0E7DB;
   border-radius: 0 0 24px 24px;
-  /* Sage green top border to connect with selected card */
   border-top: 3px solid #A3B18A;
   overflow: hidden;
   box-shadow:
@@ -288,7 +286,7 @@ body {
   width: 30px;
   height: 30px;
   font-size: 13px;
-  color: rgba(99, 81, 71, 0.45);
+  color: rgba(255, 255, 255, 0.65);
   cursor: pointer;
   display: flex;
   align-items: center;
